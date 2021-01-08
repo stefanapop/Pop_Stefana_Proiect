@@ -1,0 +1,89 @@
+﻿@page
+@model Pop_Stefana_Proiect.Pages.Angajati.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Angajat</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Angajat.NumePrenume" class="control-label"></label>
+                <input asp-for="Angajat.NumePrenume" class="form-control" />
+                <span asp-validation-for="Angajat.NumePrenume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Angajat.DataAngajarii" class="control-label"></label>
+                <input asp-for="Angajat.DataAngajarii" class="form-control" />
+                <span asp-validation-for="Angajat.DataAngajarii" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Angajat.Email" class="control-label"></label>
+                <input asp-for="Angajat.Email" class="form-control" />
+                <span asp-validation-for="Angajat.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Angajat.NrTelefon" class="control-label"></label>
+                <input asp-for="Angajat.NrTelefon" class="form-control" />
+                <span asp-validation-for="Angajat.NrTelefon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Angajat.Salariu" class="control-label"></label>
+                <input asp-for="Angajat.Salariu" class="form-control" />
+                <span asp-validation-for="Angajat.Salariu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Angajat.DepartamentID" class="control-label">Departament</label>
+                <select asp-for="Angajat.DepartamentID" class="form-control" asp-items="ViewBag.DepartamentID"></select>
+                <span asp-validation-for="Angajat.DepartamentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Angajat.JobID" class="control-label">Job</label>
+                <select asp-for="Angajat.JobID" class="form-control" asp-items="ViewBag.JobID"></select>
+                <span asp-validation-for="Angajat.JobID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                foreach (var lb in Model.AtribuireLbStLista)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="limbiSelectate"
+                                               value="@lb.LimbaStrainaID"
+                                               @(Html.Raw(lb.Atribuita ? "checked=\"checked\"" : "")) />
+                                        @lb.LimbaStrainaID @: @lb.Denumire
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
